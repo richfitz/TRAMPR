@@ -365,7 +365,7 @@ TRAMP.plotone <- function(x, sample.fk, grouped=FALSE, ignore=FALSE,
   ## knowns vs. data plot, with the rest for peaks by enzyme/primer
   ## combination.  Set aside p.labels of the horizontal space on the
   ## LHS for group labels (i.e. ylab).
-  layout(matrix(1:(n+1), n+1), height=c(p.top, rep((1-p.top)/n, n)))
+  layout(matrix(1:(n+1), n+1), heights=c(p.top, rep((1-p.top)/n, n)))
   par(oma=c(4, 0, 3, 2) + mar.default, mar=c(.75, 0, 0, 0))
   mai <- par("mai")
   mai[2] <- par("fin")[1]*p.labels

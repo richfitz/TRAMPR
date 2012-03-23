@@ -1,0 +1,91 @@
+## NAMESPACE
+## This file is part of the TRAMP package
+
+## Need a few filename bits from package:tools
+import(tools)
+
+## Exports are organised by file.
+## TRAMP.R
+## TRAMPknowns.R
+## TRAMPsamples
+## interaction.R
+## load.abi.R
+## read.write.R
+## util.R
+
+## TRAMP.R:
+export(TRAMP)
+export(rebuild.TRAMP)
+export(create.diffsmatrix)
+S3method(print, TRAMP)
+S3method(summary, TRAMP)
+export(remove.TRAMP.match)
+S3method(plot, TRAMP)
+export(TRAMP.plotone)
+S3method(update, TRAMP)
+
+## Export the methods to make it easier:
+export(summary.TRAMP)
+export(plot.TRAMP)
+export(update.TRAMP)
+
+## TRAMPknowns.R:
+export(TRAMPknowns)
+export(group.knowns)
+S3method(group.knowns, TRAMPknowns)
+S3method(group.knowns, TRAMP)
+S3method(print, TRAMPknowns)
+S3method(labels, TRAMPknowns)
+S3method(summary, TRAMPknowns)
+S3method(plot, TRAMPknowns)
+export(add.known)
+export(combine)
+S3method(add.known, TRAMP)
+S3method(add.known, TRAMPknowns)
+S3method(combine, TRAMP)
+S3method(combine, TRAMPknowns)
+export(build.knowns)
+S3method("[", TRAMPknowns)
+
+export(group.knowns.TRAMPknowns)
+export(group.knowns.TRAMP)
+export(labels.TRAMPknowns)
+export(summary.TRAMPknowns)
+export(plot.TRAMPknowns)
+export(add.known.TRAMP)
+export(add.known.TRAMPknowns)
+export(combine.TRAMP)
+export(combine.TRAMPknowns)
+export("[.TRAMPknowns")
+
+## TRAMPsamples.R:
+export(TRAMPsamples)
+S3method(print, TRAMPsamples)
+S3method(labels, TRAMPsamples)
+S3method(summary, TRAMPsamples)
+S3method(plot, TRAMPsamples)
+export(TRAMPsamples.plotone)
+export(combine.TRAMPsamples)
+S3method("[", TRAMPsamples)
+
+export(labels.TRAMPsamples)
+export(summary.TRAMPsamples)
+export("[.TRAMPsamples")
+
+## load.abi.R:
+export(load.abi)
+export(load.abi.create.template)
+export(load.abi.create.info)
+export(read.abi)
+
+## read.write.R
+export(read.TRAMPknowns)
+export(write.TRAMPknowns)
+export(read.TRAMPsamples)
+export(write.TRAMPsamples)
+
+## util.R
+## Currently ignoring must.contain.cols, read.string, strstrip and
+## rbind2.
+export(classify)
+export(absolute.min)

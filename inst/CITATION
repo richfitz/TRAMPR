@@ -1,0 +1,13 @@
+## Dear emacs, please load in -*-R-*- mode!
+citHeader("To cite TRAMPR in publications, please use:")
+
+citEntry(entry="article",
+    	 title="TRAMPR: An R package for analysis and matching of
+terminal-restriction fragment length polymorphism (TRFLP) profiles",
+	 author=personList(person("Rich", "FitzJohn", "G"),
+           person("Ian", "Dickie", "A")),
+         journal="Molecular Ecology Notes",
+         year=2007,
+         volume=7,
+         pages="583-587",
+         textVersion="FitzJohn RG, Dickie IA 2007: TRAMPR: An R package for analysis and matching of terminal-restriction fragment length polymorphism (TRFLP) profiles.  Molecular Ecology Notes 7: 583-587. Version 1.0-6.")

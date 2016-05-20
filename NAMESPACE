@@ -3,6 +3,10 @@
 
 ## Need a few filename bits from package:tools
 import(tools)
+import(utils)
+import(grDevices)
+import(graphics)
+import(stats)
 
 ## Exports are organised by file.
 ## TRAMP.R
@@ -40,6 +44,8 @@ S3method(summary, TRAMPknowns)
 S3method(plot, TRAMPknowns)
 export(add.known)
 export(combine)
+S3method(combine, TRAMP)
+S3method(combine, TRAMPsamples)
 S3method(add.known, TRAMP)
 S3method(add.known, TRAMPknowns)
 S3method(combine, TRAMP)

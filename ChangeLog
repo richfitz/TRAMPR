@@ -1,3 +1,8 @@
+2016-05-20 Rich FitzJohn <rich.fitzjohn@gmail.com>
+
+	* DESCRIPTION, NAMESPACE: Updates to make compatible with changes
+	to R in the last decade.
+
 2007-06-01  Rich FitzJohn  <fitzjohnr@landcareresearch.co.nz>
 
 	* DESCRIPTION: Bump version to 1.0-4 (prior to CRAN upload)

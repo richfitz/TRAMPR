@@ -1,6 +1,5 @@
 Package: TRAMPR
 Title: 'TRFLP' Analysis and Matching Package for R
-Date: 2016-05-20
 Version: 1.0-9
 Author: Rich FitzJohn & Ian Dickie
 Maintainer: Rich FitzJohn <rich.fitzjohn@gmail.com>

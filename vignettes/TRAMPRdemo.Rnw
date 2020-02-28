@@ -129,7 +129,7 @@ the soil cores (forest type, location, etc.).  We read that data in so
 that this can be added into the \code{TRAMPsamples} object:
 
 <<>>=
-soilcore <- read.csv("demo_samples_abi_soilcore.csv")
+soilcore <- read.csv("demo_samples_abi_soilcore.csv", stringsAsFactors = TRUE)
 @ 
 
 The last thing that needs specifying is how to interpret the

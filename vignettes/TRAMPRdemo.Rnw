@@ -1,5 +1,5 @@
-\documentclass[a4paper]{article}
-\usepackage{a4wide}
+\documentclass{article}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
 \usepackage{Sweave}
 \newcommand\code\texttt
 \newcommand\R{\textsf{R}}
@@ -37,7 +37,7 @@ with ``An Introduction to R'' (included with your \R\ distribution).
 To get started, start R, then load the \code{TRAMPR} package:
 <<>>=
 library(TRAMPR)
-@ 
+@
 
 \section{Loading data}
 \label{sec:load}
@@ -71,7 +71,7 @@ files <- c("demo_samples_abi.txt",
            "demo_samples_abi_info_full.csv",
            "demo_samples_abi_soilcore.csv")
 file.copy(system.file(files, package="TRAMPR"), ".")
-@ 
+@
 
 Next, create the ``template'' file.  Template files are required to
 record which enzymes were used for each run, since that is not
@@ -84,7 +84,7 @@ contains all the unique file names found in the ABI file (as
 
 <<>>=
 load.abi.create.template("demo_samples_abi.txt")
-@ 
+@
 
 The \code{enzyme} and \code{sample.index} columns need filling in,
 which can be done in Excel, or another spreadsheet program.  The
@@ -100,7 +100,7 @@ version of the template file, so we will use that.
 <<results=hide>>=
 file.rename("demo_samples_abi_template_full.csv",
             "demo_samples_abi_template.csv")
-@ 
+@
 
 Then, create an ``info'' file.  This is optional, but useful if you
 want to associate extra information against your samples.  The
@@ -112,7 +112,7 @@ Any additional columns may be added.
 
 <<>>=
 load.abi.create.info("demo_samples_abi.txt")
-@ 
+@
 
 The file \code{demo\_samples\_abi\_info\_full.csv} contains a filled
 in version of the info file, so we will use that.
@@ -120,7 +120,7 @@ in version of the info file, so we will use that.
 <<results=hide>>=
 file.rename("demo_samples_abi_info_full.csv",
             "demo_samples_abi_info.csv")
-@ 
+@
 
 We added a column \code{soilcore.fk}, which indicates which soil core
 the samples came from.  An additional csv file
@@ -130,7 +130,7 @@ that this can be added into the \code{TRAMPsamples} object:
 
 <<>>=
 soilcore <- read.csv("demo_samples_abi_soilcore.csv", stringsAsFactors = TRUE)
-@ 
+@
 
 The last thing that needs specifying is how to interpret the
 \code{dye} column in the ABI output.  We assume that dyes can be
@@ -141,7 +141,7 @@ dye \code{"B"} refers to the primer ``ITS1F'', while the dyes
 
 <<>>=
 primer.translate <- list(ITS1F="B", ITS4=c("G", "Y"))
-@ 
+@
 
 Now, use \code{load.abi} to construct a \code{TRAMPsamples} object
 containing all the samples.  Because we pass \code{soilcore} as a
@@ -153,7 +153,7 @@ named argument, the resulting \code{TRAMPsamples} object will have a
 demo.samples <- load.abi("demo_samples_abi.txt",
                          primer.translate=primer.translate,
                          soilcore=soilcore)
-@ 
+@
 
 \subsection{Knowns}
 
@@ -164,7 +164,7 @@ demonstration knowns, use:
 
 <<>>=
 data(demo.knowns)
-@ 
+@
 
 \code{TRAMPR} allows species in the knowns database to have multiple
 profiles.  The TRFLP profile of a single species can have variation in
@@ -180,13 +180,13 @@ output).
 
 <<eval=FALSE>>=
 plot(demo.knowns)
-@ 
+@
 
 \begin{figure}
   \centering
 <<fig=TRUE,echo=FALSE,results=hide>>=
 plot(demo.knowns)
-@ 
+@
 \caption{A plot summarising the knowns database \code{demo.knowns}.
   The panels (from left to right) illustrate: (1) the clutering of
   knowns based on TRFLP profile similarity, (2) known names, and group
@@ -206,20 +206,20 @@ run \code{TRAMP}, run:
 
 <<>>=
 fit <- TRAMP(demo.samples, demo.knowns)
-@ 
+@
 
 A fit may be plotted to inspect the match.  For example, to see the
 fit for sample 565, do (See Figure \ref{fig:plot-565} for output):
 
 <<eval=FALSE>>=
 plot(fit, 565)
-@ 
+@
 
 \begin{figure}
   \centering
 <<fig=TRUE,echo=FALSE,results=hide>>=
 plot(fit, 565)
-@ 
+@
 \caption{A plot showing the fit of sample 565 against a database of
   knowns.  The sample matches nine knowns, and many unmatched peaks
   remain.  The square points indicate matches between the knowns
@@ -236,7 +236,7 @@ You can export a PDF containing one fit per page:
 pdf("TRAMP_fits.pdf")
 plot(fit)
 dev.off()
-@ 
+@
 
 The main output of a \code{TRAMP} analysis is a presence/absence
 matrix, produced by \code{summary}:
@@ -244,7 +244,7 @@ matrix, produced by \code{summary}:
 <<>>=
 m <- summary(fit)
 m[1:5, 1:5]
-@ 
+@
 
 \code{TRAMPR} can also use ``unknown knowns''; these are patterns that
 repeatedly occur in TRFLP data, but for which a species is currently
@@ -253,7 +253,7 @@ unidentified.  The function \code{build.knowns} attempts to spot good
 
 <<>>=
 knowns.unk <- build.knowns(demo.samples)
-@ 
+@
 
 \code{build.knowns} is also useful where your sample data include
 profiles from sporocarps.  You can use the argument
@@ -266,7 +266,7 @@ come from sporocarps.)
 <<eval=FALSE>>=
 knowns.sporocarps <- build.knowns(demo.samples, restrict=TRUE,
                                   min.ratio=0)
-@ 
+@
 
 The new knowns database can be added to either the \code{TRAMP} object
 or the \code{TRAMPknowns} object.  To add the new knowns to the
@@ -274,13 +274,13 @@ or the \code{TRAMPknowns} object.  To add the new knowns to the
 
 <<>>=
 fit <- combine(fit, knowns.unk)
-@ 
+@
 
 Alternatively, to add the new knowns to the \code{TRAMPknowns} object:
 
 <<>>=
 demo.knowns <- combine(demo.knowns, knowns.unk)
-@ 
+@
 
 These are equivalent in their actions on the knowns.  The
 \code{knowns} element of \code{fit} and \code{demo.knowns} will be the
@@ -288,7 +288,7 @@ same:
 
 <<>>=
 identical(demo.knowns, fit$knowns)
-@ 
+@
 %% $ (cheers, emacs!)
 
 The main difference is that if the knowns are added to the
@@ -297,7 +297,7 @@ can always extract the modified knowns from a \code{TRAMP} object:
 
 <<eval=FALSE>>=
 demo.knowns <- fit$knowns
-@ 
+@
 %% $ (cheers, emacs!)
 
 \code{build.knowns} is fairly conservative and may miss some potential
@@ -308,22 +308,22 @@ You can plot the samples that were not added to the knowns database by
 \code{build.knowns} like this:
 
 <<eval=FALSE>>=
-samples <- setdiff(labels(demo.samples), labels(demo.knowns)) 
+samples <- setdiff(labels(demo.samples), labels(demo.knowns))
 plot(fit, samples)
-@ 
+@
 
 Sample 221 shows a clear split peak for BsuRI/ITS1F, and may be a good
 potential known:
 
 <<eval=FALSE>>=
 plot(fit, 221)
-@ 
+@
 
 or
 
 <<eval=FALSE>>=
 plot(demo.samples, 221)
-@ 
+@
 
 will show you the profile (not shown here).  We can add this to the
 database using the \code{add.known} function.  As with \code{combine},
@@ -333,13 +333,13 @@ a warning, since there are multiple peaks for BsuRI/ITS1F).
 
 <<>>=
 fit <- add.known(fit, 221, prompt=FALSE)
-@ 
+@
 
 Using the \code{summary} function, we can see which samples match this
 new known:
 <<>>=
 names(which(summary(fit)[,"221"]))
-@ 
+@
 
 Plotting the last of these shows the new known plus two
 \textit{Amanita muscaria} knowns (and several other ``unknown knowns''
@@ -348,13 +348,13 @@ from running \code{build.knowns}) matching the sample (see Figure
 
 <<eval=FALSE>>=
 plot(fit, 586)
-@ 
+@
 
 \begin{figure}
   \centering
 <<fig=TRUE,echo=FALSE,results=hide>>=
 plot(fit, 586)
-@ 
+@
 \caption{A plot showing the fit of sample ``586'' against a database
   of knowns, showing the sample matching \textit{Amanita muscaria},
   plus several ``unknown knowns'', including one added manually
@@ -371,13 +371,13 @@ are very similar or that share species names:
 
 <<eval=FALSE>>=
 plot(fit, 586, grouped=TRUE)
-@ 
+@
 
 \begin{figure}
   \centering
 <<fig=TRUE,echo=FALSE,results=hide>>=
 plot(fit, 586, grouped=TRUE)
-@ 
+@
 \caption{A plot showing the fit of sample ``586'' against a database
   of knowns, but with the knowns grouped (compare with Figure
   \ref{fig:plot-586}).  The unknown known has grouped with
@@ -400,7 +400,7 @@ shown):
 
 <<eval=FALSE>>=
 fit <- update(fit)
-@ 
+@
 
 \section{Using \code{TRAMP} results}
 
@@ -416,7 +416,7 @@ presence/absence matrix to include only genuinely different species.
 <<>>=
 m <- summary(fit, grouped=TRUE)
 m <- m[, colSums(m) > 0]
-@ 
+@
 
 Next, aggregate the results by soilcore.  Several samples came from
 each soil core, and a known is scored as being present if it is
@@ -429,7 +429,7 @@ m.bycore <- aggregate(m, by=list(cores=cores), any)
 rownames(m.bycore) <- m.bycore$cores
 m.bycore <- m.bycore[-1]
 m.bycore
-@ 
+@
 
 (The \code{m.bycore[-1]} line removes an index column that
 \code{aggregate} creates).
@@ -437,7 +437,7 @@ m.bycore
 \begin{figure}
 <<echo=FALSE>>=
 <<matrix>>
-@ 
+@
 \caption{Presence/absence matrix for the soil core data.  Rows
   represent different soil cores, with row names corresponding to
   \code{soilcore.pk} values in the \code{soilcore} table.  Columns
@@ -451,7 +451,7 @@ presence/absence matrix.
 <<>>=
 core.veg <- soilcore$vegetation[match(rownames(m.bycore),
                                       soilcore$soilcore.pk)]
-@ 
+@
 
 Next, create a rank-abundance diagram of the data (see Figure
 \ref{fig:rankabundance} for output).
@@ -460,19 +460,19 @@ Next, create a rank-abundance diagram of the data (see Figure
 sp.freq <- sort(colSums(m.bycore), decreasing=TRUE)
 plot(sp.freq, xlab="Species rank", ylab="Species frequency", type="o",
      pch=19)
-@ 
+@
 
 You can also calculate mean species richness across the different
 vegetation types:
 <<>>=
 tapply(rowSums(m.bycore), core.veg, mean)
-@ 
+@
 
 \begin{figure}
   \centering
 <<fig=TRUE,echo=FALSE,results=hide>>=
 <<rankabundance>>
-@ 
+@
 \caption{Rank-abundance diagram for \Sexpr{ncol(m.bycore)} species
   present across \Sexpr{nrow(m.bycore)} soilcores.
 }
@@ -495,13 +495,13 @@ pch <- c(1, 3)[as.integer(core.veg)]
 
 plot(pca$x[,1], pca$x[,2], col=col, pch=pch, xlab="PC1", ylab="PC2")
 legend("top", levels(core.veg), col=c("blue", "red"), pch=c(1, 3))
-@ 
+@
 
 \begin{figure}
   \centering
 <<fig=TRUE,echo=FALSE,results=hide>>=
 <<pca>>
-@ 
+@
 \caption{Principle components analysis of soil community data.
   Different points represent different soil cores, and colours
   distinguish forest types.  [We are not endorsing PCA as an
@@ -519,7 +519,7 @@ external database, use \code{write.TRAMPknowns}:
 
 <<eval=FALSE>>=
 write.TRAMPknowns(fit$knowns, "my_knowns")
-@ 
+@
 %% $
 
 This will create files \code{my\_knowns\_info.csv}  and
@@ -533,7 +533,7 @@ can be reloaded in a future \R\ session by:
 
 <<eval=FALSE>>=
 my.knowns <- read.TRAMPknowns("my_knowns")
-@ 
+@
 
 Alternatively, knowns can be saved like any other \R\ object, using
 \code{save} and \code{load}.  To save your knowns, do:
@@ -541,7 +541,7 @@ Alternatively, knowns can be saved like any other \R\ object, using
 <<eval=FALSE>>=
 my.knowns <- fit$knowns
 save(my.knowns, file="my_knowns.Rdata")
-@ 
+@
 %% $
 
 This will create a single file \code{my\_knowns.Rdata}, which is a
@@ -553,7 +553,7 @@ To reload
 this in a future \R\ session, do:
 <<eval=FALSE>>=
 load("my_knowns.Rdata")
-@ 
+@
 
 This will create an object called \code{my.knowns} in the global
 environment.
@@ -567,6 +567,6 @@ be altered by changing optional arguments.
 
 % <<echo=FALSE,results=hide>>=
 % file.remove("demo_samples_abi_template.csv")
-% @ 
+% @
 
 \end{document}

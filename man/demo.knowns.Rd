@@ -17,7 +17,7 @@
 
 \section{Licence}{This data set is provided under a Creative Commons
   \dQuote{Attribution-NonCommercial-NoDerivs 2.5} licence.  Please see
-  \url{http://creativecommons.org/licenses/by-nc-nd/2.5/} for details.
+  \url{https://creativecommons.org/licenses/by-nc-nd/2.5/} for details.
 }
 
 \keyword{datasets}

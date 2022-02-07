@@ -2,10 +2,10 @@
 citHeader("To cite TRAMPR in publications, please use:")
 
 citEntry(entry="article",
-    	 title="TRAMPR: An R package for analysis and matching of
+         title="TRAMPR: An R package for analysis and matching of
 terminal-restriction fragment length polymorphism (TRFLP) profiles",
-	 author=personList(person("Rich", "FitzJohn", "G"),
-           person("Ian", "Dickie", "A")),
+         author=personList(person("Richard G", "FitzJohn"),
+           person("Ian A", "Dickie")),
          journal="Molecular Ecology Notes",
          year=2007,
          volume=7,

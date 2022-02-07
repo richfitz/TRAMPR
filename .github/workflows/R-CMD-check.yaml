@@ -42,10 +42,12 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages:
-            - tinytex
             - rcmdcheck
 
       - uses: r-lib/actions/setup-tinytex@master
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Install latex deps
         run: |

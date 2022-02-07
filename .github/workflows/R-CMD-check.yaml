@@ -45,12 +45,7 @@ jobs:
 
       - uses: r-lib/actions/setup-tinytex@master
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Install latex deps
-        run: |
-          tinytex::tlmgr_install('ae')
-        shell: Rscript {0}
+        run: tlmgr install ae grfext
 
       - uses: r-lib/actions/check-r-package@v1

@@ -43,6 +43,8 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
+      - uses: r-lib/actions/setup-tinytex@master
+
       - name: Install latex deps
         run: |
           tinytex::tlmgr_install('ae')

@@ -1,5 +1,5 @@
 \documentclass[a4paper]{article}
-\usepackage{fullpage}
+% \usepackage{fullpage}
 \usepackage{Sweave}
 \newcommand\code\texttt
 \newcommand\R{\textsf{R}}
